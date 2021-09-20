@@ -11,23 +11,23 @@ const progressContainer = document.getElementById('progress-container')
 const title = document.getElementById('title')
 const cover = document.getElementById('cover')
 
-// Songs titles array
+
 const songs = ['activation', 'differential-pressure', 'lost-control'];
 
-//Keep track of song 
+ 
 let songIndex = 2;
 
-//Initially load song details into DOM
+
 loadSong(songs[songIndex])
 
-//Update song details
+
 function loadSong(song) {
   title.innerText = song
   audio.src = `../assets/audio/${song}.mp3`
   cover.src = `../assets/images/${song}.png`
 }
 
-// Play song 
+ 
 function playSong() {
   musicContainer.classList.add('play')
   playBtn.querySelector('i.fas').classList.remove('fa-play')
@@ -36,7 +36,7 @@ function playSong() {
   audio.play()
 }
 
-// Pause song 
+ 
 function pauseSong() {
   musicContainer.classList.remove('play')
   playBtn.querySelector('i.fas').classList.add('fa-play')
@@ -45,7 +45,7 @@ function pauseSong() {
   audio.pause()
 }
 
-// Prev song
+
 function prevSong() {
   songIndex--
 
@@ -58,7 +58,7 @@ function prevSong() {
   playSong()
 }
 
-// Next song
+
 function nextSong() {
   songIndex++
 
@@ -71,7 +71,7 @@ function nextSong() {
   playSong()
 }
 
-// Update progress bar
+
 function updateProgress(e) {
   const {duration, currentTime} = e.srcElement
   const progressPercent = (currentTime / duration) * 100
@@ -79,7 +79,7 @@ function updateProgress(e) {
   
 }
 
-// Set Progress bar
+
 function setProgress(e) {
   const width = this.clientWidth
   const clickX = e.offsetX
@@ -88,7 +88,7 @@ function setProgress(e) {
   audio.currentTime = (clickX / width) * duration
 }
 
-//Event listener 
+ 
 
 playBtn.addEventListener('click', () => {
   const isPlaying = musicContainer.classList.contains('play')
@@ -100,15 +100,15 @@ playBtn.addEventListener('click', () => {
   }
 })
 
-// Change song
+
 prevBtn.addEventListener('click', prevSong)
 nextBtn.addEventListener('click', nextSong)
 
-// Time song update event
+
 audio.addEventListener('timeupdate', updateProgress)
 
-// Click on progress bar
+
 progressContainer.addEventListener('click', setProgress)
 
-// Song end
+
 audio.addEventListener('ended', nextSong)
